@@ -9,14 +9,14 @@ class TypingScreen extends StatefulWidget {
   int? noteId;
   String? noteTitle;
   String? noteContent;
-  int lastId;
+  int? lastId;
 
   TypingScreen(
       {super.key,
       this.noteId,
       this.noteTitle,
       this.noteContent,
-      this.lastId = 0});
+      this.lastId});
 
   @override
   State<TypingScreen> createState() => _TypingScreenState();
@@ -79,8 +79,14 @@ class _TypingScreenState extends State<TypingScreen> {
                             String formattedDate =
                                 DateFormat('kk:mm EEE, M/d/y')
                                     .format(DateTime.now());
+                            var id;
+                            if(widget.lastId == null){
+                              id = widget.noteId;
+                            }else{
+                              id = widget.lastId;
+                            }
                             var note = Note(
-                              id: widget.lastId,
+                              id: id,
                               title: title,
                               content: content,
                               timestamp: formattedDate,
